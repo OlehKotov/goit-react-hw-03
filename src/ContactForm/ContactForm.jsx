@@ -1,34 +1,48 @@
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import css from "./ContactForm.module.css";
+import { FORM_INITIAL_VALUES } from "../utils/constants";
+import { useId } from "react";
+import * as Yup from "yup";
 
-const ContactForm = ({onAddUser}) => {
+const ContactSchema = Yup.object().shape({
+  name: Yup.string().min(3, "Too Short!").max(50, "Too Long!").required("Required"),
+  number: Yup.string().min(3, "Too Short!").max(50, "Too Long!").required("Required")
+});
 
-const handleSubmit = (event) => {
-       event.preventDefault()
-       const name = event.currentTarget.elements.name.value
-       const number = event.currentTarget.elements.number.value
-       const formData = {
-        name,
-        number
-       }
-       onAddUser(formData);
-       event.currentTarget.reset();
-}
+
+
+const ContactForm = ({ onAddUser }) => {
+  const nameFieldId = useId();
+  const numberFieldId = useId();
+
+  const handleSubmit = (values, actions) => {
+    onAddUser(values);
+    actions.resetForm();
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
-        <label>
-            <span>Name</span><br />
-                <input type="text" name="name" required></input>
-        </label>
-        <br />
-        <label>
-            <span>Number</span><br />
-                <input type="number" name="number" required></input>
-        </label>
-        <br />
-        <button type="submit">Add contact</button>
-    </form>
-  )
-}
+    <Formik initialValues={FORM_INITIAL_VALUES} onSubmit={handleSubmit} validationSchema={ContactSchema}>
+      <Form className={css.form}>
+        <div className={css.formLabel}>
+        <label htmlFor={nameFieldId}>Name</label>
+        <Field type="text" name="name" id={nameFieldId} className={css.formInput}/>
+        <ErrorMessage name="name" as="span" />  
+        </div>
+        
+        
+        <div className={css.formLabel}>
+         <label htmlFor={numberFieldId}>Number</label>
+        <Field type="number" name="number" id={numberFieldId} className={css.formInput}/>
+        <ErrorMessage name="number" as="span" /> 
+        </div>
+        
+        <div className={css.buttonContainer}>
+         <button type="submit" className={css.formButton}>Add contact</button> 
+        </div>
+        
+      </Form>
+    </Formik>
+  );
+};
 
-export default ContactForm
+export default ContactForm;

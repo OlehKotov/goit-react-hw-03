@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./App.css";
+import css from "./App.module.css";
 import { Formik } from "formik";
 import ContactForm from "./ContactForm/ContactForm";
 import SearchBox from "./SearchBox/SearchBox";
@@ -44,12 +44,12 @@ function App() {
     setFilter(event.target.value);
   };
   const filteredContacts = contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(filter.toLowerCase()) || contact.number.includes(filter)
+    contact.name.toLowerCase().includes(filter.toLowerCase()) || contact.number.toString().includes(filter)
   );
 
   return (
     <div>
-      <h1>Phonebook</h1>
+      <h1 className={css.header}>Phonebook</h1>
       <ContactForm onAddUser={onAddUser} />
       <SearchBox onChangeFilter={onChangeFilter} filter={filter} />
       <ContactList
