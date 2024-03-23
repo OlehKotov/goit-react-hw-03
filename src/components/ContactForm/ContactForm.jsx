@@ -1,6 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import css from "./ContactForm.module.css";
-import { FORM_INITIAL_VALUES } from "../utils/constants";
+import { FORM_INITIAL_VALUES } from "../../utils/constants";
 import { useId } from "react";
 import * as Yup from "yup";
 

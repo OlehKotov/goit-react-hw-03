@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import css from "./App.module.css";
-import { Formik } from "formik";
-import ContactForm from "./ContactForm/ContactForm";
-import SearchBox from "./SearchBox/SearchBox";
-import { ContactList } from "./ContactList/ContactList";
+import ContactForm from "./components/ContactForm/ContactForm";
+import SearchBox from "./components/SearchBox/SearchBox";
+import { ContactList } from "./components/ContactList/ContactList";
 import { nanoid } from "nanoid";
 
 const initialContacts = [
