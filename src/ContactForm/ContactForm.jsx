@@ -32,7 +32,7 @@ const ContactForm = ({ onAddUser }) => {
         
         <div className={css.formLabel}>
          <label htmlFor={numberFieldId}>Number</label>
-        <Field type="number" name="number" id={numberFieldId} className={css.formInput}/>
+        <Field type="phone" name="number" id={numberFieldId} className={css.formInput}/>
         <ErrorMessage name="number" as="span" /> 
         </div>
         
